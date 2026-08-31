@@ -1,0 +1,12 @@
+﻿= Highlight Demo
+
+[source,javascript]
+----
+function hello(name) {
+  const msg = Hello, \!;
+  console.log(msg);
+  return msg;
+}
+----
+
+Inline `code` and *bold*.

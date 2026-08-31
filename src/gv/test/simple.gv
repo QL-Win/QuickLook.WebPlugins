@@ -1,0 +1,11 @@
+// 简单有向图 — Hello World
+digraph Hello {
+    rankdir = LR;
+    node [shape=circle, style=filled, fillcolor="#4fa3e0", fontcolor=white, fontname="Helvetica"];
+    edge [color="#555555", fontname="Helvetica", fontsize=11];
+
+    A -> B [label="step 1"];
+    B -> C [label="step 2"];
+    C -> D [label="step 3"];
+    D -> A [label="loop", style=dashed, color="#e07070"];
+}

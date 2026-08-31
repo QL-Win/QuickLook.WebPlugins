@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>excalidraw — Excalidraw Viewer (Plugin)</title>
+  <link rel="stylesheet" href="/src/style.css" />
+  <!-- Plugin mode flag: the host embeds this page and communicates via postMessage -->
+  <script>window.__EXCALIDRAW_PLUGIN = true;</script>
+</head>
+<body data-plugin="1">
+  <!-- Toolbar (no Open button in plugin mode) -->
+  <header id="toolbar">
+    <div id="toolbar-left">
+      <button id="zoom-in-btn"  class="btn icon-btn" title="Zoom in">+</button>
+      <button id="zoom-out-btn" class="btn icon-btn" title="Zoom out">−</button>
+      <button id="fit-btn"      class="btn icon-btn" title="Fit to view">
+        <svg class="icon" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <path d="M4 8V5h3M4 16v3h3M20 8V5h-3M20 16v3h-3"/>
+        </svg>
+      </button>
+      <button id="reset-btn" class="btn" title="Actual size">1:1</button>
+    </div>
+
+    <span id="title" class="toolbar-title">excalidraw</span>
+
+    <div id="toolbar-right">
+      <div id="status" hidden></div>
+    </div>
+  </header>
+
+  <!-- Welcome area hidden in plugin mode; host supplies content -->
+  <div id="welcome" hidden>
+    <div id="drop-zone">
+      <p class="drop-primary">Waiting for drawing data…</p>
+    </div>
+  </div>
+
+  <!-- Viewer always visible in plugin mode -->
+  <div id="viewer">
+    <div id="graph-container">
+      <div id="graph-canvas"></div>
+    </div>
+  </div>
+
+  <!-- Hidden file input kept for API compatibility -->
+  <input id="file-input" type="file" accept=".excalidraw,application/json" style="display:none" />
+
+  <script type="module" src="/src/app.ts"></script>
+</body>
+</html>

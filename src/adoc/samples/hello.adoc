@@ -1,0 +1,18 @@
+﻿= Sample Document
+Author Name
+v1.0, 2026-07-26
+
+== Introduction
+
+Hello *AsciiDoc* world.
+
+=== Details
+
+Some `code` and a list:
+
+* One
+* Two
+
+== Conclusion
+
+Done.

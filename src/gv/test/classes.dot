@@ -1,0 +1,39 @@
+// 类继承关系图 — 使用 record shape
+digraph ClassDiagram {
+    label = "Class Hierarchy";
+    labelloc = t;
+    fontname = "Helvetica";
+    fontsize = 14;
+    rankdir = BT;   // bottom-to-top: subclasses point to base
+
+    node [shape=record, fontname="Courier New", fontsize=11,
+          style=filled, fillcolor="#f5f5f5"];
+    edge [arrowhead=empty, color="#555555"];  // UML inheritance arrow
+
+    Animal [label="{Animal|+ name: string\l+ age: int\l|+ speak(): void\l+ move(): void\l}",
+            fillcolor="#dae8fc"];
+
+    Dog [label="{Dog|+ breed: string\l|+ fetch(): void\l+ speak(): void\l}",
+         fillcolor="#d5e8d4"];
+
+    Cat [label="{Cat|+ indoor: bool\l|+ purr(): void\l+ speak(): void\l}",
+         fillcolor="#d5e8d4"];
+
+    GoldenRetriever [label="{GoldenRetriever||+ guide(): void\l}",
+                     fillcolor="#fff2cc"];
+
+    Siamese [label="{Siamese|+ points: string\l|}",
+             fillcolor="#fff2cc"];
+
+    // Inheritance
+    Dog -> Animal;
+    Cat -> Animal;
+    GoldenRetriever -> Dog;
+    Siamese -> Cat;
+
+    // Interface
+    ISpeakable [label="{«interface»\nISpeakable||+ speak(): void\l}",
+                shape=record, fillcolor="#f8cecc"];
+
+    Animal -> ISpeakable [style=dashed, arrowhead=empty, label="implements"];
+}

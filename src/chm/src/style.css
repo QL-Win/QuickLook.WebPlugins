@@ -1,0 +1,353 @@
+/* --- Reset & base styles --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* [hidden] must be display:none even inside flex containers */
+[hidden] { display: none !important; }
+
+html {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  background: #f5f5f5;
+  color: #222;
+}
+
+/* --- Toolbar --- */
+#toolbar {
+  display: flex;
+  align-items: center;
+  height: 42px;
+  padding: 0 12px;
+  background: #2c2c2c;
+  color: #eee;
+  gap: 8px;
+  flex-shrink: 0;
+  user-select: none;
+  position: relative;
+  z-index: 10;
+}
+
+#toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+#toolbar-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.toolbar-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 50%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+/* --- Buttons --- */
+.btn {
+  padding: 5px 12px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #3a3a3a;
+  color: #eee;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1.4;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.btn:hover:not(:disabled) {
+  background: #505050;
+  border-color: #888;
+}
+
+.btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.btn.icon-btn {
+  padding: 5px 9px;
+}
+
+.btn-large {
+  padding: 10px 24px;
+  font-size: 15px;
+}
+
+/* --- Status --- */
+#status {
+  font-size: 12px;
+  color: #ffd;
+  padding: 0 8px;
+}
+
+/* --- Welcome screen --- */
+#welcome {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+#drop-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 400px;
+  max-width: 90vw;
+  padding: 48px 32px;
+  border: 2px dashed #ccc;
+  border-radius: 12px;
+  background: #fff;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+#drop-zone.drag-over {
+  border-color: #2196f3;
+  background: #e3f2fd;
+}
+
+.drop-icon { font-size: 48px; }
+
+.drop-primary {
+  font-size: 16px;
+  color: #444;
+}
+
+.drop-secondary {
+  font-size: 13px;
+  color: #999;
+}
+
+/* --- Viewer layout --- */
+#viewer {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Sidebar */
+#sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  min-width: 150px;
+  max-width: 600px;
+  min-height: 0;
+  background: #fafafa;
+  border-right: 1px solid #ddd;
+  overflow: hidden;
+}
+
+#toc-header {
+  padding: 8px 12px;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #666;
+  border-bottom: 1px solid #e0e0e0;
+  flex-shrink: 0;
+}
+
+#toc-container {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 6px 0;
+}
+
+.toc-loading {
+  padding: 12px;
+  color: #888;
+  font-style: italic;
+}
+
+/* TOC tree */
+#toc-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#toc-container li {
+  display: flex;
+  flex-direction: column;
+}
+
+/* The row (toggle + label) */
+#toc-container li > .toc-toggle,
+#toc-container li > .toc-spacer,
+#toc-container li > .toc-label {
+  display: inline-block;
+}
+
+/* Each li row shown as flex row for toggle+label */
+#toc-container li {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+/* nested ul: always full width, hidden by default */
+#toc-container li > ul {
+  display: none;
+  width: 100%;
+  padding-left: 18px;
+}
+
+#toc-container li.open > ul {
+  display: block;
+}
+
+.toc-toggle {
+  flex-shrink: 0;
+  width: 18px;
+  font-size: 10px;
+  cursor: pointer;
+  color: #888;
+  padding: 5px 2px;
+  user-select: none;
+}
+
+.toc-toggle:hover { color: #333; }
+
+.toc-spacer {
+  flex-shrink: 0;
+  width: 18px;
+}
+
+.toc-label {
+  flex: 1;
+  padding: 4px 8px 4px 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  color: #333;
+  cursor: default;
+}
+
+.toc-label.toc-link {
+  cursor: pointer;
+  color: #1565c0;
+}
+
+.toc-label.toc-link:hover {
+  text-decoration: underline;
+  background: #e8f0fe;
+  border-radius: 3px;
+}
+
+.toc-label.active {
+  background: #1565c0;
+  color: #fff;
+  border-radius: 3px;
+}
+
+/* Ensure active TOC items remain readable when hovered: keep a darker
+   background so white text keeps sufficient contrast, and avoid the
+   light hover background which would reduce contrast. */
+.toc-label.active:hover {
+  background: #0f4a86;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Resizer */
+#resizer {
+  width: 2px;
+  cursor: col-resize;
+  background: #ddd;
+  transition: background 0.15s, box-shadow 0.12s;
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* Expand hit-target without changing visual thickness so it's easier to grab */
+#resizer::before {
+  content: '';
+  position: absolute;
+  left: -9px;
+  right: -9px;
+  top: 0;
+  bottom: 0;
+  background: transparent;
+  cursor: col-resize;
+}
+
+#resizer:hover, #resizer:active {
+  background: #2196f3;
+  box-shadow: 0 0 0 1px rgba(33,150,243,0.08) inset;
+}
+
+/* Content area */
+#content {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+#content-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #fff;
+}
+
+/* CHM content host (used when rendering into a div) */
+#content-html {
+  background: #fff;
+  min-height: 0;
+}
+
+/* Wrap injected CHM content in a host element and revert global resets
+   so the application's CSS does not interfere with CHM page styles. */
+.chm-host,
+.chm-host * {
+  all: revert;
+}
+.chm-host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+/* Inline SVG icon styles */
+.icon, .toc-icon { vertical-align: middle; display: inline-block; }
+.icon { width: 18px; height: 18px; }
+.btn.icon-btn svg, .icon, .toc-icon { width: 18px; height: 18px; }
+.btn.icon-btn svg path, .icon path, .toc-icon path { stroke: currentColor; fill: none; }
+.toc-toggle { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; margin-right: 6px; }
+.toc-spacer { display:inline-block; width:20px; height:20px; margin-right:6px; }
+
+/* Chevron rotation when node open */
+.toc-toggle .toc-icon { transition: transform 180ms cubic-bezier(0.4,0,0.2,1); transform-origin: 50% 50%; display: block; }
+#toc-container li.open > .toc-toggle .toc-icon,
+.toc-toggle[aria-expanded="true"] .toc-icon { transform: rotate(90deg); }

@@ -1,0 +1,35 @@
+// 无向图 — 社交网络 (适合 neato / fdp 引擎)
+graph SocialNetwork {
+    label = "Social Network (try: neato / fdp engine)";
+    labelloc = t;
+    fontname = "Helvetica";
+    fontsize = 13;
+
+    node [shape=circle, style=filled, fontname="Helvetica", fontsize=11, width=0.7];
+    edge [fontname="Helvetica", fontsize=10, color="#888888"];
+
+    // People
+    Alice   [fillcolor="#ffadad"];
+    Bob     [fillcolor="#ffd6a5"];
+    Carol   [fillcolor="#fdffb6"];
+    Dave    [fillcolor="#caffbf"];
+    Eve     [fillcolor="#9bf6ff"];
+    Frank   [fillcolor="#a0c4ff"];
+    Grace   [fillcolor="#bdb2ff"];
+    Heidi   [fillcolor="#ffc6ff"];
+
+    // Friendships
+    Alice -- Bob   [label="college"];
+    Alice -- Carol [label="work"];
+    Alice -- Dave;
+    Bob   -- Dave  [label="neighbors"];
+    Bob   -- Eve;
+    Carol -- Frank [label="family"];
+    Carol -- Grace;
+    Dave  -- Eve;
+    Dave  -- Heidi;
+    Eve   -- Frank;
+    Frank -- Grace [label="work"];
+    Grace -- Heidi [label="college"];
+    Heidi -- Alice [label="gym"];
+}

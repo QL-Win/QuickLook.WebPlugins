@@ -1,0 +1,36 @@
+// 有限状态机 (FSM) — 适合 dot 引擎
+digraph FSM {
+    label = "TCP Connection State Machine";
+    labelloc = t;
+    fontname = "Helvetica";
+    fontsize = 14;
+    rankdir = LR;
+
+    node [shape=doublecircle, style=filled, fillcolor="#d5e8d4", fontname="Helvetica"];
+    CLOSED;
+    ESTABLISHED;
+
+    node [shape=circle, style=filled, fillcolor="#dae8fc", fontname="Helvetica"];
+    LISTEN; SYN_SENT; SYN_RCVD; FIN_WAIT_1; FIN_WAIT_2;
+    TIME_WAIT; CLOSE_WAIT; LAST_ACK; CLOSING;
+
+    CLOSED     -> LISTEN    [label="passive open"];
+    CLOSED     -> SYN_SENT  [label="active open\n/ send SYN"];
+    LISTEN     -> SYN_RCVD  [label="rcv SYN\n/ send SYN+ACK"];
+    LISTEN     -> SYN_SENT  [label="send SYN"];
+    SYN_SENT   -> CLOSED    [label="close\n/ timeout"];
+    SYN_SENT   -> ESTABLISHED [label="rcv SYN+ACK\n/ send ACK"];
+    SYN_SENT   -> SYN_RCVD  [label="rcv SYN\n/ send SYN+ACK"];
+    SYN_RCVD   -> ESTABLISHED [label="rcv ACK"];
+    SYN_RCVD   -> FIN_WAIT_1 [label="close\n/ send FIN"];
+    ESTABLISHED -> FIN_WAIT_1 [label="close\n/ send FIN"];
+    ESTABLISHED -> CLOSE_WAIT [label="rcv FIN\n/ send ACK"];
+    FIN_WAIT_1 -> FIN_WAIT_2 [label="rcv ACK"];
+    FIN_WAIT_1 -> CLOSING    [label="rcv FIN\n/ send ACK"];
+    FIN_WAIT_1 -> TIME_WAIT  [label="rcv FIN+ACK\n/ send ACK"];
+    FIN_WAIT_2 -> TIME_WAIT  [label="rcv FIN\n/ send ACK"];
+    CLOSING    -> TIME_WAIT  [label="rcv ACK"];
+    TIME_WAIT  -> CLOSED     [label="timeout\n(2 MSL)"];
+    CLOSE_WAIT -> LAST_ACK   [label="close\n/ send FIN"];
+    LAST_ACK   -> CLOSED     [label="rcv ACK"];
+}

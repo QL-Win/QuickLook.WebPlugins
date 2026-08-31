@@ -1,0 +1,62 @@
+// 带聚合子图 (cluster) 的架构图
+digraph Architecture {
+    label = "Web Application Architecture";
+    labelloc = t;
+    fontname = "Helvetica";
+    fontsize = 14;
+    compound = true;
+    rankdir = TB;
+    node [fontname="Helvetica", fontsize=12];
+    edge [fontname="Helvetica", fontsize=11];
+
+    // Client tier
+    subgraph cluster_client {
+        label = "Client";
+        style = filled;
+        fillcolor = "#fff2cc";
+        color = "#d6b656";
+        fontcolor = "#7d5a00";
+
+        Browser [label="Browser", shape=box, style="filled,rounded", fillcolor="#ffe6a0"];
+        MobileApp [label="Mobile App", shape=box, style="filled,rounded", fillcolor="#ffe6a0"];
+    }
+
+    // Application tier
+    subgraph cluster_app {
+        label = "Application Tier";
+        style = filled;
+        fillcolor = "#dae8fc";
+        color = "#6c8ebf";
+        fontcolor = "#003366";
+
+        LB [label="Load Balancer", shape=box, style="filled,rounded", fillcolor="#a9c4e8"];
+        Web1 [label="Web Server 1", shape=box, style=filled, fillcolor="#c5d9f5"];
+        Web2 [label="Web Server 2", shape=box, style=filled, fillcolor="#c5d9f5"];
+        API  [label="API Server",   shape=box, style=filled, fillcolor="#c5d9f5"];
+    }
+
+    // Data tier
+    subgraph cluster_data {
+        label = "Data Tier";
+        style = filled;
+        fillcolor = "#d5e8d4";
+        color = "#82b366";
+        fontcolor = "#1a5c00";
+
+        PrimaryDB [label="Primary DB", shape=cylinder, style=filled, fillcolor="#a8d5a0"];
+        ReplicaDB [label="Replica DB", shape=cylinder, style=filled, fillcolor="#a8d5a0"];
+        Cache     [label="Redis Cache", shape=box3d, style=filled, fillcolor="#a8d5a0"];
+    }
+
+    // Edges
+    Browser   -> LB   [label="HTTPS"];
+    MobileApp -> LB   [label="HTTPS"];
+    LB -> Web1 [label="HTTP"];
+    LB -> Web2 [label="HTTP"];
+    Web1 -> API [label="REST"];
+    Web2 -> API [label="REST"];
+    API  -> Cache     [label="read/write"];
+    API  -> PrimaryDB [label="write"];
+    API  -> ReplicaDB [label="read"];
+    PrimaryDB -> ReplicaDB [label="replication", style=dashed, color="#666"];
+}

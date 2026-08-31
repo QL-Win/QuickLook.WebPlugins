@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iconfont — Icon Font Viewer (Plugin)</title>
+  <link rel="stylesheet" href="/src/style.css" />
+  <script>window.__ICONFONT_PLUGIN = true;</script>
+  <script>
+    (function () {
+      var d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.dataset.theme = d ? 'dark' : 'light';
+    })();
+  </script>
+</head>
+<body data-plugin="1">
+  <div id="main">
+    <div id="content">
+      <div id="welcome" hidden>
+        <div id="drop-zone">
+          <p class="drop-primary">Waiting for font data…</p>
+        </div>
+      </div>
+
+      <div id="browser">
+        <div class="set-header">
+          <div class="set-header-main">
+            <h1 id="set-title">Icon Set</h1>
+            <div class="set-meta">
+              <span>Font: <strong id="set-family">—</strong></span>
+              <span>File: <strong id="set-file">—</strong></span>
+              <span>Grid: <strong id="set-grid">48px</strong></span>
+            </div>
+          </div>
+          <div class="set-header-actions">
+            <div class="search-wrap">
+              <span class="search-icon" data-fluent-icon="search" data-fluent-size="16"></span>
+              <input id="search-input" type="search" placeholder="Search icons…" autocomplete="off" />
+            </div>
+            <div class="grid-controls">
+              <div class="number-stepper toolbar-stepper has-unit">
+                <div class="number-stepper-field">
+                  <div class="number-stepper-value">
+                    <input id="size-input" class="control-input number-stepper-input" type="number" value="48" min="12" max="128" step="1" title="Icon size" />
+                    <span class="number-stepper-suffix">px</span>
+                  </div>
+                </div>
+                <div class="number-stepper-btns">
+                  <button type="button" class="number-stepper-btn" data-step="1" title="Increase" aria-label="Increase" data-fluent-icon="chevron_up" data-fluent-size="12"></button>
+                  <button type="button" class="number-stepper-btn" data-step="-1" title="Decrease" aria-label="Decrease" data-fluent-icon="chevron_down" data-fluent-size="12"></button>
+                </div>
+              </div>
+              <input id="color-input" class="control-input" type="color" value="#1e293b" title="Icon color" />
+            </div>
+          </div>
+        </div>
+
+        <div id="icons-grid-wrap">
+          <div id="icons-grid"></div>
+        </div>
+
+        <div class="icons-toolbar">
+          <div class="icons-count"><strong id="visible-count">0</strong> / <strong id="total-count">0</strong> icons</div>
+          <div class="pagination">
+            <div class="fluent-combobox page-size-combobox" id="page-size-combobox">
+              <div class="fluent-combobox-field">
+                <input id="page-size-input" class="fluent-combobox-input" type="text" inputmode="numeric" value="10000" title="Icons per page" autocomplete="off" />
+                <button type="button" class="fluent-combobox-toggle" aria-label="Icons per page options" aria-expanded="false" data-fluent-icon="chevron_down" data-fluent-size="12"></button>
+              </div>
+              <div class="fluent-combobox-popup" role="listbox" aria-label="Icons per page" hidden>
+                <button type="button" class="fluent-combobox-option" role="option" data-value="10">10</button>
+                <button type="button" class="fluent-combobox-option" role="option" data-value="50">50</button>
+                <button type="button" class="fluent-combobox-option" role="option" data-value="100">100</button>
+                <button type="button" class="fluent-combobox-option" role="option" data-value="500">500</button>
+                <button type="button" class="fluent-combobox-option" role="option" data-value="1000">1000</button>
+                <button type="button" class="fluent-combobox-option" role="option" data-value="5000">5000</button>
+                <button type="button" class="fluent-combobox-option" role="option" data-value="10000">10000</button>
+                <button type="button" class="fluent-combobox-option" role="option" data-value="15000">15000</button>
+                <button type="button" class="fluent-combobox-option" role="option" data-value="20000">20000</button>
+              </div>
+            </div>
+            <button id="page-prev" class="btn btn-sm icon-btn" type="button" title="Previous page" disabled data-fluent-icon="chevron_left" data-fluent-size="16"></button>
+            <span id="page-info" class="pagination-info">—</span>
+            <button id="page-next" class="btn btn-sm icon-btn" type="button" title="Next page" disabled data-fluent-icon="chevron_right" data-fluent-size="16"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside id="detail-panel" class="empty">
+      <p>Waiting for font…</p>
+    </aside>
+  </div>
+
+  <div id="status" hidden></div>
+
+  <input id="font-input" type="file" hidden />
+  <input id="css-input" type="file" hidden />
+  <style id="iconfont-face"></style>
+  <script type="module" src="/src/app.ts"></script>
+</body>
+</html>

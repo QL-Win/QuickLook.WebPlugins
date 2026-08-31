@@ -1,0 +1,11 @@
+﻿= Syntax Highlighting Tests
+
+== 1. About
+
+This document contains sample test cases.
+
+== 2. Test Case Notation
+
+NOTE: Files must be UTF-8.
+
+https://example.com/[link]

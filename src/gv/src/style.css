@@ -1,0 +1,248 @@
+/* ─── Reset ──────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+[hidden] { display: none !important; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  background: #1a1a1a;
+  color: #e0e0e0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Toolbar ────────────────────────────────────────────────────────────── */
+#toolbar {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 10px;
+  background: #252525;
+  border-bottom: 1px solid #333;
+  gap: 6px;
+  flex-shrink: 0;
+  user-select: none;
+  position: relative;
+  z-index: 10;
+}
+
+#toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+#toolbar-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.toolbar-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 45%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+  font-size: 13px;
+  color: #bbb;
+  pointer-events: none;
+}
+
+body[data-plugin="1"] .toolbar-title {
+  display: none;
+}
+
+.toolbar-label {
+  font-size: 12px;
+  color: #888;
+  white-space: nowrap;
+}
+
+/* ─── Buttons ────────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border: 1px solid #484848;
+  border-radius: 4px;
+  background: #333;
+  color: #e0e0e0;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+  transition: background 0.12s, border-color 0.12s;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.btn:hover:not(:disabled) {
+  background: #444;
+  border-color: #666;
+}
+
+.btn:active:not(:disabled) {
+  background: #3a3a3a;
+}
+
+.btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.btn.icon-btn {
+  padding: 5px 9px;
+  min-width: 30px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.btn-large {
+  padding: 10px 28px;
+  font-size: 15px;
+  border-radius: 6px;
+}
+
+.icon {
+  flex-shrink: 0;
+}
+
+/* ─── Select ─────────────────────────────────────────────────────────────── */
+.select {
+  padding: 5px 8px;
+  border: 1px solid #484848;
+  border-radius: 4px;
+  background: #333;
+  color: #e0e0e0;
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color 0.12s;
+}
+
+.select:hover {
+  border-color: #666;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #4fa3e0;
+}
+
+/* ─── Separator ──────────────────────────────────────────────────────────── */
+.separator {
+  width: 1px;
+  height: 22px;
+  background: #444;
+  margin: 0 2px;
+  flex-shrink: 0;
+}
+
+/* ─── Status bar ─────────────────────────────────────────────────────────── */
+#status {
+  font-size: 12px;
+  color: #999;
+  padding: 0 8px;
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#status.error {
+  color: #e07070;
+}
+
+/* ─── Welcome / Drop zone ────────────────────────────────────────────────── */
+#welcome {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  background: #1a1a1a;
+}
+
+#drop-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 420px;
+  max-width: 90vw;
+  padding: 52px 40px;
+  border: 2px dashed #444;
+  border-radius: 14px;
+  background: #222;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+#drop-zone.drag-over,
+#welcome.drag-over #drop-zone {
+  border-color: #4fa3e0;
+  background: #1e2d3d;
+}
+
+.drop-icon {
+  opacity: 0.85;
+}
+
+.drop-primary {
+  font-size: 16px;
+  color: #ccc;
+  text-align: center;
+}
+
+.drop-secondary {
+  font-size: 13px;
+  color: #555;
+}
+
+.drop-hint {
+  font-size: 12px;
+  color: #555;
+  text-align: center;
+}
+
+/* ─── Viewer ─────────────────────────────────────────────────────────────── */
+#viewer {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ─── Graph container ────────────────────────────────────────────────────── */
+#graph-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  cursor: grab;
+}
+
+#graph-container.drag-over {
+  outline: 3px solid #4fa3e0;
+  outline-offset: -3px;
+}
+
+#graph-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+}
+
+#graph-canvas svg {
+  display: block;
+}

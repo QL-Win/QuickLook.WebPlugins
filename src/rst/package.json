@@ -1,0 +1,23 @@
+﻿{
+  "name": "rst",
+  "version": "1.0.0",
+  "description": "Browser-based reStructuredText viewer — renders .rst files directly in the browser",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "build:singlefiles": "node ./scripts/make-singlefiles.js",
+    "build:all": "npm run build && npm run build:singlefiles",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "highlight.js": "^11.11.1",
+    "rst-compiler": "^0.5.9"
+  },
+  "devDependencies": {
+    "happy-dom": "^20.11.1",
+    "typescript": "^5.6.0",
+    "vite": "^6.0.0",
+    "vite-plugin-singlefile": "^2.3.3"
+  }
+}
